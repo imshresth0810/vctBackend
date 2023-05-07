@@ -26,14 +26,14 @@ router.post('/createuser', [
             secure: false,
             auth: {
                 user: 'gauravshresth.iitkgp@gmail.com',
-                pass: '',
+                pass: 'ksmvnspydyhvlzgr',
             },
         });
 
         var mailOptions = ({
             from: {
-                name: "TAdS VCT",
-                address: "tads.vct2022@gmail.com"
+                name: "DevSoc VCT",
+                address: "gauravshresth.iitkgp@gmail.com"
             },
             to: `${email}`,
             subject: "VCT INVITATION",
@@ -51,7 +51,7 @@ router.post('/createuser', [
             <br>
             <h4>Thanks and Regards<br>
             Team Virtual Cycle Trip<br>
-            Technology Adventure Society</h4>`,
+            Developers' Society</h4>`,
         });
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
@@ -91,7 +91,7 @@ router.post('/createuser', [
         // }
         // const authToken = jwt.sign(data, jwtsecret);
         success = true;
-        res.json({ success,pcode })
+        res.json({ success, pcode })
 
     } catch (error) {
         console.error(error.message, "---error in token");
