@@ -14,7 +14,7 @@ app.use(cors())
 const port = 8000;
 
 // http://localhost:8000/user/
-app.get('/test', (req, res) => { res.send("Test API")})
+app.get('/test', (req, res) => { res.send("Test API11")})
 app.use('/user', require('./routes/tads_user.js'));
 app.use('/riddle', require('./routes/tads_riddles.js'));
 

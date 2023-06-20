@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/userSchema');
 const { body, validationResult } = require('express-validator');
-// const bcrypt = require('bcrypt');
+require('dotenv').config()
 const jwt = require('jsonwebtoken');
 const jwtsecret = "xyz123";
 const nodemailer = require("nodemailer");
@@ -25,15 +25,15 @@ router.post('/createuser', [
             port: 587,
             secure: false,
             auth: {
-                user: 'gauravshresth.iitkgp@gmail.com',
-                pass: 'ksmvnspydyhvlzgr',
+                user: process.env.USER_EMAIL,
+                pass: process.env.USER_PASS,
             },
         });
 
         var mailOptions = ({
             from: {
                 name: "DevSoc VCT",
-                address: "gauravshresth.iitkgp@gmail.com"
+                address: process.env.USER_EMAIL
             },
             to: `${email}`,
             subject: "VCT INVITATION",
@@ -77,19 +77,10 @@ router.post('/createuser', [
             email: req.body.email,
             passcode: pcode,
             tokens: "",
-            // userHrCount: 0,
-            // userMinCount: 0,
-            // userSecCount: 0,
             userRiddleIndex: 0
         })
         // localStorage.setItem("count", 0);
         mailer(req.body.email, req.body.name, pcode);
-        // const data = {
-        //     user: {
-        //         id: user.id
-        //     }
-        // }
-        // const authToken = jwt.sign(data, jwtsecret);
         success = true;
         res.json({ success, pcode })
 
@@ -113,7 +104,6 @@ router.post('/loginuser', [
     // let success = true;
     const { email, passcode } = req.body;
     try {
-        //,
         let user = await User.findOne({ email });
         if (!user) {
             return res.status(400).json({ error: "Enter the Valid Credentials1" });

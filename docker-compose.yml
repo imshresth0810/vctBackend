@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  # mongDB
+  mongo_db:
+    container_name: db_container
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongo_db:/data/db
+
+  #  Node API
+  api:
+    build: .
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/usr/src/index
+    environment:
+      MONGO_URI_OLD: "mongodb+srv://imshresth:imshresth@cluster0.6c0eb.mongodb.net/TAdS_VCT?retryWrites=true&w=majority"
+      MONGO_URI1: "mongodb+srv://gauravshresth2000:HFFgcpWDYP1p3uuH@cluster0.1iqgzmn.mongodb.net/vct?retryWrites=true&w=majority"
+      MONGO_URI2: "mongodb://localhost:27017/vct"
+      USER_EMAIL: "gauravshresth.iitkgp@gmail.com"
+      USER_PASS: "ksmvnspydyhvlzgr"
+    depends_on:
+      - mongo_db
+
+volumes:
+  mongo_db: {}
